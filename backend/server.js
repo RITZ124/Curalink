@@ -9,6 +9,7 @@ const researchRoutes = require('./routes/research');
 const sessionRoutes = require('./routes/sessions');
 
 const app = express();
+app.set('trust proxy', 1);
 app.get('/', (req, res) => {
   res.send('CuraLink Backend API is running');
 });
