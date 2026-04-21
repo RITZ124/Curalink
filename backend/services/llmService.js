@@ -30,7 +30,8 @@ async function callOllama(prompt, systemPrompt) {
  */
 async function callHuggingFace(prompt, systemPrompt) {
   if (!HF_TOKEN) throw new Error('No HuggingFace token');
-
+  console.log('HF MODEL:', HF_MODEL);
+  console.log('HF URL:', `https://api-inference.huggingface.co/models/${HF_MODEL}`);
   const fullPrompt = systemPrompt
     ? `<s>[INST] ${systemPrompt}\n\n${prompt} [/INST]`
     : `<s>[INST] ${prompt} [/INST]`;
@@ -66,7 +67,8 @@ async function callHuggingFace(prompt, systemPrompt) {
 async function callAnthropic(prompt, systemPrompt) {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) throw new Error('No Anthropic key');
-
+  console.log('Anthropic model: claude-3-haiku-20240307');
+  console.log('Anthropic key exists:', !!key);
   const res = await axios.post(
     'https://api.anthropic.com/v1/messages',
     {
