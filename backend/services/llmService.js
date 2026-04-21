@@ -63,19 +63,28 @@ async function callAnthropic(prompt, systemPrompt) {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) throw new Error('No Anthropic key');
 
-  const res = await axios.post('https://api.anthropic.com/v1/messages', {
-    model: 'claude-3-haiku-20240307',
-    max_tokens: 2000,
-    system: systemPrompt || 'You are a medical research assistant.',
-    messages: [{ role: 'user', content: prompt }]
-  }, {
-    headers: {
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json'
+  const res = await axios.post(
+    'https://api.anthropic.com/v1/messages',
+    {
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 1000,
+      system: systemPrompt || 'You are a medical research assistant.',
+      messages: [
+        {
+          role: 'user',
+          content: prompt
+        }
+      ]
     },
-    timeout: 60000
-  });
+    {
+      headers: {
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json'
+      },
+      timeout: 60000
+    }
+  );
 
   return res.data?.content?.[0]?.text || '';
 }
