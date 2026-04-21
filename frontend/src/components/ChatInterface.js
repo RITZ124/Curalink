@@ -56,7 +56,7 @@ const exportChatToPDF = async () => {
     heightLeft -= pageHeight;
   }
 
-  pdf.save('curalink-chat.pdf');
+  pdf.save('MedIntel-chat.pdf');
 };
 export default function ChatInterface({ sessionId, userContext, messages, setMessages, onResearchData }) {
   const [input, setInput] = useState('');
