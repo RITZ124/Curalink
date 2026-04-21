@@ -52,7 +52,11 @@ async function callHuggingFace(prompt, systemPrompt) {
     }
   );
 
-  const generated = res.data?.[0]?.generated_text || '';
+  const generated =
+    res.data?.[0]?.generated_text ||
+    res.data?.generated_text ||
+    '';
+
   return generated;
 }
 
