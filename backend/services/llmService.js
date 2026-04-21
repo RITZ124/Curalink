@@ -64,7 +64,7 @@ async function callAnthropic(prompt, systemPrompt) {
   if (!key) throw new Error('No Anthropic key');
 
   const res = await axios.post('https://api.anthropic.com/v1/messages', {
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-3-haiku-20240307',
     max_tokens: 2000,
     system: systemPrompt || 'You are a medical research assistant.',
     messages: [{ role: 'user', content: prompt }]
