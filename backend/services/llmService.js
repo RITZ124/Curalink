@@ -93,7 +93,7 @@ async function callAnthropic(prompt, systemPrompt) {
       headers: {
         'x-api-key': key,
         'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'anthropic-dangerous-direct-browser-access': 'true',
         'content-type': 'application/json'
       },
       timeout: 60000
