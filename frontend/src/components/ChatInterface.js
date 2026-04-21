@@ -16,14 +16,45 @@ const exportChatToPDF = async () => {
   const element = document.querySelector('.messages-list');
   if (!element) return;
 
-  const canvas = await html2canvas(element);
+  const originalHeight = element.style.height;
+  const originalOverflow = element.style.overflow;
+
+  element.style.height = 'auto';
+  element.style.overflow = 'visible';
+
+  const canvas = await html2canvas(element, {
+    scale: 2,
+    useCORS: true,
+    scrollY: -window.scrollY,
+    windowWidth: element.scrollWidth,
+    windowHeight: element.scrollHeight
+  });
+
+  element.style.height = originalHeight;
+  element.style.overflow = originalOverflow;
+
   const imgData = canvas.toDataURL('image/png');
 
   const pdf = new jsPDF('p', 'mm', 'a4');
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  const pdfWidth = 210;
+  const pageHeight = 297;
+  const imgWidth = pdfWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  let heightLeft = imgHeight;
+  let position = 0;
+
+  pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+  heightLeft -= pageHeight;
+
+  while (heightLeft > 0) {
+    position = heightLeft - imgHeight;
+    pdf.addPage();
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+  }
+
   pdf.save('curalink-chat.pdf');
 };
 export default function ChatInterface({ sessionId, userContext, messages, setMessages, onResearchData }) {
