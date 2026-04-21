@@ -69,7 +69,7 @@ function App() {
                 </linearGradient>
               </defs>
             </svg>
-            <span>CuraLink</span>
+            <span>MedIntel</span>
             <span className="badge">AI Medical Research</span>
           </div>
         </div>
