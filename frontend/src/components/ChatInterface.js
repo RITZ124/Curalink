@@ -173,7 +173,7 @@ export default function ChatInterface({ sessionId, userContext, messages, setMes
                 </defs>
               </svg>
             </div>
-            <h1>CuraLink Research Assistant</h1>
+            <h1>MedIntel Research Assistant</h1>
             <p>Evidence-based medical insights from PubMed, OpenAlex & ClinicalTrials.gov</p>
             {userContext.disease && (
               <div className="context-pill">
@@ -239,7 +239,7 @@ export default function ChatInterface({ sessionId, userContext, messages, setMes
             </svg>
           </button>
         </div>
-        <p className="disclaimer">CuraLink provides research summaries only. Always consult a licensed physician for medical decisions.</p>
+        <p className="disclaimer">MedIntel provides research summaries only. Always consult a licensed physician for medical decisions.</p>
       </div>
     </div>
   );
